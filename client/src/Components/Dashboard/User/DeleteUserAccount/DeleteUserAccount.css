@@ -1,0 +1,33 @@
+.deleteUserDiv {
+  position: absolute;
+  left: 19.7%;
+  top: 110px;
+  border-radius: 10px;
+  /* width: 1076px; */
+  width: 79%;
+  height: fit-content;
+  padding: 20px;
+  background-color: white;
+}
+
+.deleteP {
+  line-height: 0.5;
+}
+
+.deleteProfileBtnDiv {
+  display: flex;
+  justify-content: center;
+}
+
+.deleteProfileBtn {
+  background-color: rgb(164, 0, 0);
+  font-size: 1vw;
+  color: white;
+  padding: 7px 22px;
+  border-radius: 20px;
+  border: 0;
+}
+
+.deleteProfileBtn:hover{
+  background-color: rgb(133, 4, 4);
+}

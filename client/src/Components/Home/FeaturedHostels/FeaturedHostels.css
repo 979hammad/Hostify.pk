@@ -1,0 +1,76 @@
+#card{
+   width: 250px;
+}
+
+#hostelName{
+    font-size: 15px;
+}
+
+#fHIco{
+  font-size: 20px;
+  width: 50px;
+  padding: 2px 10px;
+  background-color: #F1F3F4;
+  border-radius: 3px;
+}
+
+#hostelRatings{
+  margin: 7px 0;;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+
+/* previous css */
+
+/*}.hostelList{
+  position: relative;
+  width: 200px;
+  height: 250px;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+.hostelImg{
+  width: 200px;
+  height: 250px;
+  transition: transform 0.3s ease-in-out; 
+  transform-origin: bottom;
+}
+.caption{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(12, 59, 110);
+  background-color:#022230cd;
+  color: white;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: transform 0.3s ease-in-out;
+  transform-origin: bottom;
+}
+.hostelList:hover .hover {
+  transform: scale(1.1); 
+  cursor: pointer;
+} 
+.hostelList:hover .hostelImg,
+.hostelList:hover .caption { 
+    transform: scale(1.04);  
+}
+
+.enquireButton{
+  margin-left: 70px;
+  font-size: 1vw;
+  text-decoration: none;
+  border-style: solid; 
+  color:var(--main-color);
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  background-color: white;
+  padding: 5px;
+}
+
+*/

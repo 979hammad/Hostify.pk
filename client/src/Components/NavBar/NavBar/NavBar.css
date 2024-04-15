@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  background-color: rgb(12, 51, 110);
+  z-index: 1000;
+  box-shadow: 0.079vw 0.079vw 0.792vw  rgba(58, 58, 58, 0.434);
+  color: #ffffff;
+}
+
+.nav {
+  height: 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2vw 0 2vw;
+  
+}
+
+#navAvatar{
+  background-color: rgb(143, 6, 185);
+  width: 26px;
+  height: 26px;
+  font-size: 12px;
+}
+
+.middleNav {
+  position: relative;
+  left: 5.701vw;
+  display: flex;
+  justify-content: center;
+ 
+  
+}
+
+.middleNavItems,
+.rightNavRegister {
+  font-size: 1vw;
+  text-decoration: none;
+  border-radius: .4vw;
+  color: rgb(255, 255, 255);
+  padding: 0.4vw 0.6vw;
+  transition: background-color 0.3s ease;
+  text-shadow: 0.2px 0.2px 0.4px rgba(0, 0, 0, 0.3);
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.rightNavRegister {
+
+  background-color:#3E84B2;
+  color: white;
+  padding: 8px 1vw;
+  transition: color 0.3s ease;
+}
+
+.rightNav {
+  display: flex;
+  align-items: center;
+}
+
+#navOptions {
+  padding: 0.317vw 0.633vw;
+  border: 0.079vw solid var(--gray-color);
+  border-radius: .5vw;
+  margin-left: 0.792vw;
+  color: #ffffff;
+}
+
+#navOptionsLines {
+  font-size: 1.188vw;
+  margin-right: 0.5vw;
+}
+
+#menuItemLoggedOut {
+  font-size: 0.9vw;
+  padding: 0.5vw 5vw 0.5vw 2vw;
+}
+
+#menuItem {
+  color: black;
+  font-size: 0.9vw;
+  padding: 0.5vw 0vw 0.5vw 2vw;
+}
+
+.textDecoration{
+  text-decoration: none;
+}
+
+
+.isActiveMiddleNav,
+.middleNavItems:hover,
+.rightNavRegister:hover {
+  background-color: #30698f;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.middleNavItems:hover{
+  background-color: #30698f;
+}
+
+#menuItemHr {
+  margin: 0.35vw 0.4vw 0.1vw 0.4vw;
+  border: none;
+  height: 1px;
+  background-color: var(--gray-color);
+}
+
+#logoutIco{
+  margin-left: 4vw;
+  margin-right: 1vw;
+  font-size: 1.3vw;
+}
+
+@media only screen and (max-width: 543px) {
+  .nav{
+    height: 7vw
+  }
+}

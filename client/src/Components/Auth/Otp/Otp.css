@@ -1,0 +1,47 @@
+.otpForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3vw;
+    width: 25vw;
+}
+
+.otpHeading{
+    font-size: 1.8vw;
+    font-weight: 600;
+    margin-bottom: 1vw;
+}
+
+.infoOTP {
+    font-size: 1vw;
+    color: rgb(204, 0, 0);
+}
+  
+#infoIcoOTP {
+    font-size: 1.3vw;
+}
+
+.otpInputContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.otpInput{
+    height: 45px;
+    text-align: center;
+    width: 45px;
+}
+
+.btnOtpDiv{
+    display: flex;
+    justify-content: center;
+}
+
+#btnOtp{
+    color: white;
+    padding: 7px 22px;
+    background-color: #0B2A58;
+    border-radius: 20px;
+    border: 0;;
+    margin-bottom : 10px;
+}

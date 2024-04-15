@@ -1,0 +1,11 @@
+.postSectionDiv{
+  position: absolute;
+   left: 19.7%;
+   top: 110px;
+   border-radius: 10px;
+   /* width: 1076px; */
+   width: 79%;
+   height: 400px;
+   padding: 20px;
+   background-color: white;
+ }

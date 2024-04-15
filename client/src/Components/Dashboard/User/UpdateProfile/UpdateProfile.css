@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.updateProfileDiv {
+    position: absolute;
+    left: 19.7%;
+    top: 105px;
+    border-radius: 10px;
+    width: 79%;
+    height: fit-content;
+    padding: 20px;
+    color: white;
+    background-color: #0B2A58;
+}
+
+.updateProfile2ndDiv {
+    position: absolute;
+    left: 19.7%;
+    top: 289px;
+    border-radius: 10px;
+    width: 79%;
+    height: fit-content;
+    padding: 20px;
+    background-color: white;
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+    width: 37%;
+    justify-content: space-between;
+}
+
+.cameraIconDiv {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    padding-bottom: 4px;
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0) 75%, #0b2a58b0 10.01%);
+    border: 3px solid #B5C2C9;
+    cursor: pointer;
+}
+
+#updateProfileCameraIco{
+    color: white;
+    font-size: 22px;
+}
+
+.userData {
+    line-height: 0.5;
+}
+
+#updateProfileIco {
+    width: 130px;
+    height: 130px;
+    font-size: 80px;
+    background-color: rgb(10, 58, 80);
+}
+
+#updateProfileForm {
+    margin-top: 25px;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 326px 326px 326px;
+}
+
+.updateProfileL {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+#fName,
+#lName,
+#gender,
+#userCity,
+#province {
+    width: 310px;
+    height: 38px;
+    padding: 5px 10px;
+    background-color: rgb(240, 240, 240);
+    font-size: 1vw;
+    border: none;
+    color: rgb(80, 80, 80);
+    outline: 0;
+}
+
+/* #name, #cnic, #email, #userCity{
+    height: 28px;
+    width: 290px;
+} */
+
+.minHeight {
+    min-height: 75px;
+}
+
+.errorUpdateUser {
+    font-size: 12px;
+    color: rgb(153, 0, 0);
+}
+
+.updateProfileBtnDiv {
+    display: flex;
+    justify-content: end;
+
+}
+
+.updateProfileBtn {
+    color: white;
+    padding: 7px 22px;
+    background-color: #0B2A58;
+    border-radius: 20px;
+    border: 0;
+}
+
+.updateProfileBtn:hover {
+    background-color: #081e3f;
+}

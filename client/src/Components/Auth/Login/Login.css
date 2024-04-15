@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100&family=Work+Sans:wght@300&display=swap');
+@import "../../../Constants/Colors.css";
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.signinForm{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
+}
+
+.signInForm{
+    display: flex;
+    flex-direction: column;
+    width: 25vmax;
+    padding: 1vw 3vw;
+    border-radius: 8px;
+}
+
+.signInHeading{
+    font-size: 2.5vw;
+    font-weight: 800;
+}
+
+.signInMsg{
+    font-size: 1vw;
+    margin-bottom: 0.7vw;
+    margin-top: -1.5vw;
+    font-weight: 500;
+}
+
+#password, #email {
+    
+    font-size: 1vw;
+}
+
+#signInFormInputs{
+    margin-bottom: 1vw;
+    color: rgb(195, 0, 0);
+    min-height: 20px;
+}
+
+#loginBtn{
+    font-size: 1vw;
+    border-radius: 20px;
+    padding: 0.35vw;
+    background-color: var(--main-color);
+}
+
+.googleLogin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4vw;
+    font-size: 1.1vw;
+    border: 1px solid rgb(153, 153, 153);
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.googleLogin:hover{
+    background-color: rgb(241, 241, 241);
+    border: 1px solid rgb(241, 241, 241);
+}
+
+.googleLogo{
+    width: 1.2vw;
+    margin-right: 10px;
+}
+
+.line {
+    display: flex;
+    align-items: center;
+    margin: 12px 0 12px 0;
+}
+  
+.hrLine {
+    flex: 1;
+    border: 0;
+    border-top: 1px solid #bebebe; 
+    margin: 0 10px; 
+}
+
+.signUp{
+    margin : 12px 0px 12px 0px;
+    font-size: 1.1vw;
+    font-weight: 600;
+}
+
+.signUpClick{
+    color: var(--main-color);
+    text-decoration: underline;
+    font-weight: 100;
+    cursor: pointer;
+}
+
+@media only screen and (max-width : 1188px){
+    .signInFormMain{
+        height: 60vw;
+        width: 40vw;
+    }
+    
+    .signInForm{
+        background-color: white;
+        width: 38vmax;
+        padding: 1vw 3vw;
+        border-radius: 8px;
+    }
+
+    .googleLoginP{
+        font-size: 1.5vw;
+    }
+    
+}
+
+@media only screen and (max-width : 995px){
+    .signInFormMain{
+        height: 65vw;
+        width: 55vw;
+    }
+    
+    .signInForm{
+        width: 43vmax;
+        padding: 1vw 3vw;
+    }
+    
+    .signInHeading{
+        margin-top: 0vw;
+        font-size: 3.7vw;
+    }
+    
+    .signInMsg{
+        font-size: 2vw;
+    }
+
+    #email, #password{
+        font-size: 3vw;
+    }
+    
+    #signInFormInputs{
+        font-size: 2vw;
+        margin-bottom: 3vw;
+        color: rgb(195, 0, 0);
+    }
+    
+    
+    #loginBtn{
+        font-size: 2.5vw;
+        border-radius: 20px;
+    }
+    
+    .signUp{
+        margin-top: 12px;
+        font-size: 2vw;
+        font-weight: 600;
+    }
+
+
+    .googleLogo{
+        width: 2.5vw;
+    }
+
+    .googleLoginP{
+        font-size: 2.4vw;
+    }
+}
+
+@media only screen and (max-width : 745px){
+    .signInFormMain{
+        height: 87vw;
+        width: 70vw;
+    }
+    
+    .signInForm{
+        width: 40vmax;
+        padding: 1vw 3vw;
+    }
+    
+    .signInHeading{
+        font-size: 6vw;
+    }
+    
+    .signInMsg{
+        font-size: 2.7vw;
+    }
+
+    #email, #password{
+        font-size: 3.5vw;
+    }
+    
+    #signInFormInputs{
+        font-size: 2.5vw;
+    }
+    
+    #loginBtn{
+        font-size: 2.5vw;
+    }
+    
+    .signUp{
+        font-size: 3vw;
+
+    }
+
+
+    .googleLogo{
+        width: 2.8vw;
+    }
+
+    .googleLoginP{
+        font-size: 2.8vw;
+    }
+}
+
+
+@media only screen and (max-width : 550px){
+    .signInFormMain{
+        height: 90vw;
+        width: 80vw;
+    }
+    
+    .signInForm{
+        width: 33vmax;
+        padding: 1vw 3vw;
+    }
+    
+    .signInHeading{
+        font-size: 9vw;
+    }
+    
+    .signInMsg{
+        font-size: 3.2vw;
+    }
+
+    #email, #password{
+        font-size: 3.7vw;
+    }
+    
+    #signInFormInputs{
+        font-size: 2.8vw;
+    }
+
+    #loginBtn{
+        font-size: 3.6vw;
+    }
+    
+    .signUp{
+        font-size: 3.2vw;
+
+    }
+
+    .signUp{
+        font-size: 2.2vw;
+    }
+
+    .googleLogo{
+        width: 3.6vw;
+    }
+
+    .googleLoginP{
+        font-size: 3.5vw;
+    }
+    
+}
+
