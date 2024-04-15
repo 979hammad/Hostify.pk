@@ -8,11 +8,10 @@ import { v2 as cloudinary } from "cloudinary";
 import { OTP } from "../dataBase/models/userOtpModel.js";
 
 const userSignUp = async (req, res) => {
-  const {email, password, cPassword} = req.body
+  const {email, password} = req.body
   if (
     !email ||
-    !password ||
-    !cPassword
+    !password 
   ) {
     throw new ExpressError(400, "Please Enter all required fields");
   } else {
@@ -20,7 +19,7 @@ const userSignUp = async (req, res) => {
     if (userFound) {
       throw new ExpressError(404, "Email already registered kindly login");
     }
-    if (password === cPassword) {
+    if (password) {
       const salt = await bcrypt.genSalt();
       const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -82,10 +81,10 @@ const userSignUp = async (req, res) => {
         user : newUser._id,
       })
       await otpData.save();
-      // res.cookie("token", token, { httpOnly: true, maxAge: 86400000 });
+      res.cookie("token", token, { httpOnly: true, maxAge: 86400000 });
       res.status(201).json({
         success: true,
-        token,
+        // token,
         newUser,
       });
     } else {
