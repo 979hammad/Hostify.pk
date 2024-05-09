@@ -16,7 +16,7 @@ const EmailRegister = ({openSignUp, setOpenSignUp }) => {
   const {register, handleSubmit, formState: { errors }, reset} = useForm();
   const [openSignUpNo, setOpenSignUpNo] = useState(false);
   const [openOTP, setOpenOTP] = useState(false);
-  const [openLogin, setOpen] = useState(false)
+  const [openLogin, setOpen] = useState(false);
   
   useEffect(() => {
     if (otpSending2 === "success") {
@@ -26,7 +26,6 @@ const EmailRegister = ({openSignUp, setOpenSignUp }) => {
 
   const submitForm = (data) => {
     dispatch(signUpUser(data));
-
   };
 
   return (

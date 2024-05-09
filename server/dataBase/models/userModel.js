@@ -36,8 +36,7 @@ const userSchema = new Schema({
         type: Number,
     },
     userPic: {
-        type: Schema.Types.ObjectId,
-        ref: "Images"
+        type: String,
     },
     city: {
         type: String,

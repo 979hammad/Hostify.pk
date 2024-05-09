@@ -13,8 +13,9 @@ export const loginWithGoogle = createAsyncThunk("user/loginWithGoogle", async ()
       "Access-Control-Allow-Credentials" : true
     }});
     localStorage.setItem("token", response.data.token);
+    
     return response?.data?.user._json;
-
+    
   } catch (error) {
     throw error?.response?.data;
   }
@@ -25,7 +26,6 @@ export const signUpUser = createAsyncThunk("user/signUpUser", async (data) => {
 
     const response = await axios.post(`${api}/signup`, data);
     localStorage.setItem("userId", response.data.newUser._id);
-    localStorage.setItem("token", response.data.token);
     return response?.data;
 
   } catch (error) {
@@ -41,7 +41,9 @@ export const verifyOTP = createAsyncThunk("user/verifyOTP", async (otp) => {
       userId
     }
     const response = await axios.post(`${api}/verifyotp`, data)
-
+    localStorage.setItem("userId", response.data.newUser._id);
+    localStorage.setItem("token", response.data.token);
+    
     return response.data;
   } catch (error) {
     throw error.response.data
@@ -138,6 +140,7 @@ const initialState = {
   profileUpdating: "idle",
   changingPass: "idle",
   deletingAccount: "idle",
+  userPic: null,
   user: {}
 }
 
@@ -151,6 +154,7 @@ export const userAuthSlice = createSlice({
         
       })
       .addCase(loginWithGoogle.fulfilled, (state, action) => {
+        state.userPic = action.payload.picture
         state.user = action.payload
       })
       .addCase(loginWithGoogle.rejected, (state, action) => {
@@ -160,13 +164,9 @@ export const userAuthSlice = createSlice({
         state.otpSending = "pending"
       })
       .addCase(signUpUser.fulfilled, (state, action) => {
-
         state.otpSending = "success"
-        state.user = action.payload.newUser
-        console.log(action.payload.newUser)
       })
       .addCase(signUpUser.rejected, (state, action) => {
-
         state.otpSending = "resend"
         toast.error(action.error.message)
       })
@@ -175,6 +175,8 @@ export const userAuthSlice = createSlice({
       })
       .addCase(verifyOTP.fulfilled, (state, action) => {
         state.resendOTP = "success"
+        state.otpSending = "idle"
+        state.user = action.payload.newUser
         toast.success("Account Created Successfully")
       })
       .addCase(verifyOTP.rejected, (state, action) => {
@@ -243,6 +245,7 @@ export const otpSending = (state) => state.otpSending;
 export const resendOTP = (state) => state.resendOTP;
 export const userLogin = (state) => state.userLogin;
 export const user = (state) => state.user;
+export const userPic = (state) => state.userPic;
 export const profileUpdating = (state) => state.profileUpdating;
 export const changingPass = (state) => state.changingPass;
 export const deletingAccount = (state) => state.deletingAccount;

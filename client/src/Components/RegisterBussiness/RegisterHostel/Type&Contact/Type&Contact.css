@@ -7,6 +7,17 @@
   align-items: center;
 }
 
+.typeAndContactUpdateDiv{
+  position: absolute;
+  left: 19.7%;
+  top: 110px;
+  border-radius: 10px;
+  width: 79%;
+  height: fit-content;
+  padding: 20px;
+  background-color: white;
+}
+
 .Htype {
   font-size: 2vw;
   margin-top: 3.4vw;

@@ -9,7 +9,7 @@ import HImages from "./HImages/HImages";
 import RoomCharges from "./RoomCharges/RoomCharges";
 import ManualAddress from "./ManualAddress/ManualAddress";
 import RegistrationCompleted from "./RegistrationCompleted/RegistrationCompleted";
-const steps = ["Basic Information", "Type & Contact", "Facilities & Rules", "Charges", "Images", "Address"];
+const steps = ["Basic Information", "Type & Contact", "Facilities & Rules", "Charges", "Address", "Images"];
 
 const RegisterBussiness = ({name}) => {
   const [activeStep, setActiveStep] = useState(0);
@@ -42,9 +42,8 @@ const RegisterBussiness = ({name}) => {
             {steps[activeStep] === "Type & Contact" ? <TypeAndContact name = {name} handleNext={handleNext}/> : ""}
             {steps[activeStep] === "Facilities & Rules" ? <Hfacilities name = {name} handleNext={handleNext}/> : ""}
             {steps[activeStep] === "Charges" ? <RoomCharges handleNext={handleNext}/> : ""}
-            {steps[activeStep] === "Images" ? <HImages name = {name} handleNext={handleNext}/> : ""}
             {steps[activeStep] === "Address" ? <ManualAddress name = {name} handleNext={handleNext}/> : ""}
-            
+            {steps[activeStep] === "Images" ? <HImages name = {name} handleNext={handleNext}/> : ""}
             <div id="stepperBottom">
               <Button id="stepperPrevBtns" disabled={activeStep === 0} onClick={handleBack}>
                 Back

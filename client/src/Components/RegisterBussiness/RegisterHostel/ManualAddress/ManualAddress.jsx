@@ -1,12 +1,16 @@
 import { Button, FormHelperText, InputLabel, MenuItem, TextField, useForm } from "../../../../assets/MaterialUiExports";
 import "./ManualAddress.css";
+import { useDispatch, useSelector } from "react-redux";
+import { registerHostel, hDataLoading } from "../../../../features/hostel/registerHostelSlice";
 
 const ManualAddress = ({name, handleNext}) => {
+  const dispatch = useDispatch();
   const {register, handleSubmit, formState : {errors}} = useForm();
-  
+  const hDataLoading2 = useSelector((state)=> hDataLoading(state.hostel));
+
   const submitForm = (address) => {
     localStorage.setItem("manualAddress", JSON.stringify(address))
-    handleNext()
+    dispatch(registerHostel())
   }
   return (
     <>
@@ -55,7 +59,15 @@ const ManualAddress = ({name, handleNext}) => {
         />
         <FormHelperText id="hHelperText">{errors?.completeAddress?.message}</FormHelperText>
     </div>
-    <Button type="submit" id="stepperNextBtns" variant="contained" >Next</Button>      
+    {hDataLoading2 === "idle" && (
+        <Button id="stepperNextBtns" variant="contained" type="submit">Save</Button>
+      )}
+      {hDataLoading2 === "pending" && (
+        <Button id="stepperNextBtns" variant="contained" >saving...</Button>
+      )}
+      {hDataLoading2 === "success" && (
+        <Button id="stepperNextBtns" variant="contained" onClick={()=>handleNext()}>Next</Button>
+      )}
     </form>
     </>
   )

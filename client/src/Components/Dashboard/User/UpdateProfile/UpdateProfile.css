@@ -50,9 +50,9 @@
     font-size: 22px;
 }
 
-.userData {
+/* .userData {
     line-height: 0.5;
-}
+} */
 
 #updateProfileIco {
     width: 130px;
@@ -100,22 +100,4 @@
 .errorUpdateUser {
     font-size: 12px;
     color: rgb(153, 0, 0);
-}
-
-.updateProfileBtnDiv {
-    display: flex;
-    justify-content: end;
-
-}
-
-.updateProfileBtn {
-    color: white;
-    padding: 7px 22px;
-    background-color: #0B2A58;
-    border-radius: 20px;
-    border: 0;
-}
-
-.updateProfileBtn:hover {
-    background-color: #081e3f;
 }

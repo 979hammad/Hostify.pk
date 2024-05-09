@@ -46,7 +46,7 @@ const Otp = ({ openOTP, setOpenOTP, setOpenSignUp, reset }) => {
 
     return (
         <>
-            <OTPSignUp onClose={() => setOpenOTP(false)} open={openOTP} >
+            <OTPSignUp open={openOTP} >
                 <form onSubmit={(e) => { e.preventDefault(); handleSubmit() }}>
                     <div className="otpForm">
                         <p className="otpHeading">Enter OTP</p>

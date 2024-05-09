@@ -1,14 +1,16 @@
 import { User } from "../dataBase/models/userModel.js";
 import { Images } from "../dataBase/models/imagesModel.js";
+import { Hostel } from "../dataBase/models/hostelsModel.js";
 import bcrypt from "bcrypt";
 import ExpressError from "../middlewares/ExpressError.js";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import { v2 as cloudinary } from "cloudinary";
 import { OTP } from "../dataBase/models/userOtpModel.js";
+import { data } from "../modules/helper.js";
 
 const userSignUp = async (req, res) => {
-  const {email, password, cPassword} = req.body
+  const { email, password, cPassword } = req.body
   if (
     !email ||
     !password ||
@@ -22,71 +24,56 @@ const userSignUp = async (req, res) => {
     }
     if (password === cPassword) {
       const salt = await bcrypt.genSalt();
+      data(salt)
       const hashedPassword = await bcrypt.hash(password, salt);
 
-      // Create and save the image in the Images model
-      // let userImage;
-      // if (req.file) {
-      //   const { path, filename } = req.file;
-      //   userImage = new Images({ userImage: { path, filename } });
-      //   await userImage.save();
-      // }else{
-      //   const path = "https://res.cloudinary.com/dni5tyfft/image/upload/v1700908646/hostify.pk%5BUserImages%5D/tvqwpi9qzkjxyqjzl9ar.png";
-      //   const filename = "hostify.pk[UserImages]/tvqwpi9qzkjxyqjzl9ar";
-      //   userImage = new Images({ userImage: { path, filename } });
-      //   await userImage.save();
-      // }
-
-      
       const dataToSave = new User({
         email,
         password: hashedPassword,
-        // userPic: userImage ? userImage : null,
       });
       const transporter = nodemailer.createTransport({
-        service : "gmail",
-        host : "smtp.gmail.com",
+        service: "gmail",
+        host: "smtp.gmail.com",
         auth: {
-          user: "979hammadakram@gmail.com" ,
-          pass: "proqlgznxvtaeopg",
+          user: "979hammadakram@gmail.com",
+          pass: "uzfumoyxpemzoqrt",
         },
       });
-    
+
       const otp = Math.floor(1000 + Math.random() * 9000)
-      const mailOptions  = {
+      const mailOptions = {
         from: {
-          name : "Hostify.pk",
-          address : "979hammadakram@gmail.com"
+          name: "Hostify.pk",
+          address: "979hammadakram@gmail.com"
         },
         to: email, // list of receivers
-        subject: "OTP-SignUp[Hostify.pk]", // Subject line
+        subject: "Your Hostify.pk Login OTP", // Subject line
         // text: "Hello world?", // plain text body
-        html: `<b>Your OTP is ${otp}</b>`, // html body
+        html:
+          `<b>otp is: ${otp}</b>`, // html body
       }
-    
-    
-      const sendMail = async(transporter, mailOptions) => {
-       
-        try{
-         await transporter.sendMail(mailOptions);
-        }catch(error){
+
+      const sendMail = async (transporter, mailOptions) => {
+        try {
+          await transporter.sendMail(mailOptions);
+        } catch (error) {
           console.log(error)
         }
-      }    
-      await sendMail(transporter, mailOptions); 
+      }
+
+      await sendMail(transporter, mailOptions);
 
       const newUser = await dataToSave.save();
-      const token = jwt.sign({ id: newUser._id }, process.env.jwtkey);
+      // const token = jwt.sign({ id: newUser._id }, process.env.jwtkey);
       const otpData = new OTP({
         otp,
-        user : newUser._id,
+        user: newUser._id,
       })
       await otpData.save();
       // res.cookie("token", token, { httpOnly: true, maxAge: 86400000 });
       res.status(201).json({
         success: true,
-        token,
-        newUser,
+        newUser
       });
     } else {
       throw new ExpressError(400, "Password and Confirm Password don't match");
@@ -94,26 +81,36 @@ const userSignUp = async (req, res) => {
   }
 };
 
-const verifyOtp = async (req,res) => {
-    const {otp, userId} = req.body;
-    const otpExists = await OTP.findOne({user : userId});
-    
-    if(!otpExists){
-      await User.deleteOne({ _id : userId });
-      throw new ExpressError(400, "InValid OTP, Register agian");
-    }
+const verifyOtp = async (req, res) => {
+  const { otp, userId } = req.body;
 
-    if(parseInt(otpExists.otp) === parseInt(otp)){
-      await User.findByIdAndUpdate(userId, { verified: true });
-      await OTP.deleteOne({ user: userId });
+  const otpExists = await OTP.findOne({ user: userId });
+  console.log(otpExists)
+  if (!otpExists) {
+    await User.deleteOne({ _id: userId });
+    await OTP.deleteOne({ user: userId });
+    throw new ExpressError(400, "InValid OTP, Register agian");
 
-      return res.status(200).json({ success: true });
-    }else{
-      await User.deleteOne({ _id : userId });
-      await OTP.deleteOne({ user: userId });
-      throw new ExpressError(400, "InValid OTP, Register agian");
-    }
-   
+  }
+
+  if (parseInt(otpExists.otp) === parseInt(otp)) {
+
+    const newUser = await User.findByIdAndUpdate(userId, { verified: true });
+    const token = jwt.sign({ id: newUser._id }, process.env.jwtkey);
+
+    await OTP.deleteOne({ user: userId });
+
+    return res.status(200).json({
+      success: true,
+      token,
+      newUser
+    });
+  } else {
+    await User.deleteOne({ _id: userId });
+    await OTP.deleteOne({ user: userId });
+    throw new ExpressError(400, "InValid OTP, Register agian");
+  }
+
 }
 
 const userLogIn = async (req, res) => {
@@ -124,6 +121,9 @@ const userLogIn = async (req, res) => {
   } else {
     const userFound = await User.findOne({ email });
     if (userFound) {
+      if (!userFound.password) {
+        throw new ExpressError(404, "Kindly login with google as before")
+      }
       const passwordMatched = await bcrypt.compare(
         password,
         userFound.password
@@ -237,19 +237,8 @@ const changeProfileImage = async (req, res) => {
 };
 
 const deleteUserAccount = async (req, res) => {
-  const userFound = await User.findById(req.user.id);
-
-  if(req.user.userPic){
-    const imagesFound = await Images.findById(req.user.userPic);
-    if(imagesFound.userImage.filename !== "userImage"){
-      // Deleting user image from cloudinary storage
-      await cloudinary.uploader.destroy(imagesFound.userImage.filename);
-    }
-    await imagesFound.deleteOne();
-  }
-
-  // Deleting data from database
-  await userFound.deleteOne();
+  await Hostel.deleteMany({owner : req.user.id})
+  await User.findByIdAndDelete(req.user.id);
 
   return res.status(200).json({
     success: true,

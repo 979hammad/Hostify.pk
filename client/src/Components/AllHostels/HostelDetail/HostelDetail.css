@@ -1,0 +1,70 @@
+.hostelDetailNav{
+   position: sticky;
+   z-index: 10;
+   top: 0;  
+   padding: 10px 5px; 
+   background-color: white;
+   border-bottom: 1px solid rgb(228, 228, 228); 
+}
+
+.backToAllHostelsBtn{
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    padding: 7px 22px;
+    margin: 0 105px;
+    width: 120px;
+    background-color: rgb(10, 38, 80);
+    border-radius: 20px;
+}
+
+.backToAllHostelsBtn:hover{
+    color: white;
+    background-color: rgb(11, 42, 88);
+
+}
+
+@keyframes moveFro {
+    0% { transform: translateX(-2px); }
+    50% { transform: translateX(2px); }
+    100% { transform: translateX(-2px); }
+}
+  
+#backToAllHostelsIco {
+    font-size: 20px;
+    animation: moveFro 2s ease infinite alternate; 
+}
+
+.hostelDetailHostelName{
+    margin-top: 20px;
+    font-size: 35px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.hostelDetailMainDiv{
+    margin: 0 105px;   
+}
+
+.showReviews{
+    width: 98.6vw;
+    height: 400px;
+    background-image: url("/images/reviews-blue.png");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.userReviews{
+    background-color: white;
+    width: 400px;
+    height: 200px;
+    border-radius: 30px;
+}
+
+p{
+    margin-bottom: 0;
+}

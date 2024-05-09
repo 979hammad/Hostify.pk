@@ -1,10 +1,17 @@
 @import "../../../../Constants/Colors.css";
 
-.basicInfoMain {
+.changeBasicInformationDiv {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  height: 30vw;
+  flex-direction: column;
+  position: absolute;
+  left: 19.7%;
+  top: 110px;
+  border-radius: 10px;
+  width: 79%;
+  height: fit-content;
+  padding: 20px;
+  background-color: white;
 }
 
 .basicInfoH {
@@ -14,6 +21,11 @@
   position: relative;
   left: 3.2vw;
   padding-right: 13vw;
+}
+
+.extraPadding{
+  
+  left: 1px !important;
 }
 
 .info {

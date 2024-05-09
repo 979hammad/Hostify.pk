@@ -1,0 +1,32 @@
+.hostelDetailTableDiv{
+   margin-bottom: 5%;
+}
+
+.hostelDetailRoomType{
+   /* background-color: aqua; */
+   width: 300px;
+   padding: 20px;
+   border-radius: 20px;
+   border: 0.5px solid rgb(228, 228, 228);
+   box-shadow: 2px 2px 5px rgb(228, 228, 228);
+}
+
+.hostelDtailRoomsDiv{
+   display: grid;
+   grid-template-columns: 300px 300px 300px;
+   column-gap: 30px;
+   row-gap: 30px;
+   margin-bottom: 5%;
+}
+
+/* 
+.tableDivHeadingRow{
+    background-color: rgb(12, 51, 110);
+    color: white;
+}
+
+.tableDivTH{
+   width: 900px;
+   height: 50px;
+   text-align: center;
+} */

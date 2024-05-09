@@ -13,19 +13,18 @@ router.route("/login/success").get(async(req, res) => {
       
       // Check if user exists in the database
       let user = await User.findOne({ googleId: id });
+      console.log(user);
+
       if (!user) {
         // If user doesn't exist, create a new user record
         const path = req.user._json.picture;
-        const filename = "userImage"
-        const userImage = new Images({ userImage: { path, filename } });
-        await userImage.save();
-      
+  
         const dataToSave = new User({
           googleId: id,
           fName: givenName, 
           lName: familyName, 
           email: emails[0].value, 
-          userPic: userImage ? userImage : null,
+          userPic: path,
           verified: true 
         });
       

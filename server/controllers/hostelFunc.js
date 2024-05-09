@@ -2,6 +2,8 @@ import ExpressError from "../middlewares/ExpressError.js";
 import { Hostel } from "../dataBase/models/hostelsModel.js";
 import { Images } from "../dataBase/models/imagesModel.js";
 import { User } from "../dataBase/models/userModel.js";
+import { HostelReview } from "../dataBase/models/hostelReviews.js";
+
 // New Hostel creation functions
 const registerHostel = async (req, res) => {
   let { basicInfo, typeAndContact, facilities, rules, roomCharges, manualAddress } = req.body;
@@ -13,13 +15,15 @@ const registerHostel = async (req, res) => {
   rules = JSON.parse(rules)
   roomCharges = JSON.parse(roomCharges)
   manualAddress = JSON.parse(manualAddress)
-  
+
+  console.log(manualAddress)
+
   //Saving room data 
   const rooms = roomCharges.map(room => ({
     roomType: room.roomType,
     details: room.detail,
-    noOfBeds: parseInt(room.noOfBeds), 
-    charges: parseFloat(room.charges) 
+    noOfBeds: parseInt(room.noOfBeds),
+    charges: parseFloat(room.charges)
   }));
 
   //Saving data to database
@@ -30,7 +34,8 @@ const registerHostel = async (req, res) => {
     HcontactNoW: typeAndContact.HcontactNoW,
     category: typeAndContact.category,
     city: manualAddress.cityName,
-    completeAdress: manualAddress.streetNo,
+    completeAdress: manualAddress.completeAddress,
+    streetNo: manualAddress.streetNo,
     province: manualAddress.province,
     country: manualAddress.country,
     facilities,
@@ -48,44 +53,29 @@ const registerHostel = async (req, res) => {
   );
 
   return res.json({
+    hostelId: savedHostel._id,
     msg: "saved successfully now add other info",
   });
 }
 
 const registerHostelImages = async (req, res) => {
-  console.log(req.files)
-  return res.json({
-    msg: "saved successfully now add other info",
-  });
-  // if (req.files && req.files.length > 0 || typeof req.file !== 'undefined') {
-    //     const findHostel = await Hostel.findById(hostelId);
-    
-    //     if (!findHostel) {
-    //       throw new ExpressError(404,"You have to create account again from start");
-    //     }
-    
-    //     const images = req.files.map((file) => ({
-    //       path: file.path,
-    //       filename: file.filename,
-    //     }));
-    
-    //     // Save images in the Images model 
-    //     let imagesModel = await Images.findByIdAndUpdate(
-    //           req.user.userPic,
-    //           { $push: { hostelImages: { $each: images } } },
-    //           { new: true, useFindAndModify: false }
-    //         );
-    
-    //     // Update Hostel model with the Images model ID
-    //     findHostel.hostelImages = imagesModel._id;
-    //     await findHostel.save();
-    
-    //     res.status(201).json({
-    //       msg: "Images added successfully",
-    //     });
-    //   } else {
-    //     throw new ExpressError(404, "Please upload atleast one image");
-    //   }
+  if (req.files && req.files.length > 0 || typeof req.file !== 'undefined') {
+    const images = req.files.map((file) => ({
+      path: file.path,
+      filename: file.filename,
+    }));
+
+    await Hostel.findByIdAndUpdate(req.params.id,
+      { $push: { hostelImages: { $each: images } } },
+      { new: true, useFindAndModify: false }
+    );
+
+    res.status(201).json({
+      msg: "Images added successfully",
+    });
+  } else {
+    throw new ExpressError(404, "Please upload atleast one image");
+  }
 }
 
 // const hostelbasicInfo = async (req, res) => {
@@ -217,42 +207,107 @@ const registerHostelImages = async (req, res) => {
 //   }
 // };
 
-// // display all hostels
-// const diplayAllHostels = async (req, res) => {
-//   const allHostels = await Hostel.find();
+// display all hostels
+const diplayAllHostels = async (req, res) => {
+  const allHostels = await Hostel.find();
+  res.status(200).json({
+    allHostels
+  })
+}
 
-//   res.status(200).json({
-//     msg : "All hostels are here",
-//     allHostels
-//   })
-// }
+// dispaly hostel detail
 
-// // dispaly hostel detail
-// const displayHostelDetail = async (req, res) => {
-//   const {hostelId} = req.params;
-//   const hostelDetail = await Hostel.findById(hostelId);
+const displayHostelDetail = async (req, res) => {
+  const hostelId = req.params.id;
+  const hostelDetail = await Hostel.findById(hostelId).populate('owner');
+  const reviews = await HostelReview.find({ hostel: hostelId }).populate('user');
 
-//   if(hostelDetail){
-//     res.status(200).json({
-//       msg : "Hostel detail is as follows",
-//       hostelDetail
-//     })
-//   }else{
-//     throw new ExpressError(404, "No hostel detail found")
-//   }
-// }
+  if(hostelDetail){
+    res.status(200).json({
+      msg : "Hostel detail is as follows",
+      hostelDetail,
+      reviews
+    })
+  }else{
+    throw new ExpressError(404, "No hostel detail found")
+  }
+}
 
-// const diplayMyHostel = async (req, res) => {
-//   const myHostel = await Hostel.findById(req.hostel._id).populate("hostelImages");
+const addHostelReviews = async (req, res) => {
+  const { comment, rating } = req.body;
+  const hostelId = req.params.id;
 
-//   if(!myHostel){
-//     throw new ExpressError(404, "You have no registered hostel");
-//   }
-//   res.json({
-//     msg : "your hostel detail is here",
-//     myHostel
-//   })
-// }
+  if (!comment || !rating) {
+    throw new ExpressError(401, "Kindly add both comment and rating")
+  }
+
+  const reviewAdded = await HostelReview.findOne({ hostel: hostelId });
+
+  if(reviewAdded){
+    throw new ExpressError(401, "One review per hostel")
+  }
+
+  const newReview = new HostelReview({
+    user: req.user._id,
+    hostel: hostelId,
+    rating,
+    comment
+  });
+
+  await newReview.save();
+  const hostelReviews = await HostelReview.find({ hostel: hostelId }).populate("user");
+
+  res.status(201).json({
+    msg: "Review added",
+    hostelReviews
+  })
+
+}
+
+const diplayMyHostels = async (req, res) => {
+
+  const myHostels = await Hostel.find({ owner: req.user._id });
+
+  if (!myHostels) {
+    throw new ExpressError(404, "You have no registered hostel");
+  }
+  res.json({
+    msg: "your hostel detail is here",
+    myHostels
+  })
+}
+
+const updateMyHostels = async (req, res) => {
+  const { title, description, category, HcontactNoP, HcontactNoW, completeAdress, streetNo, province, country } = req.body;
+  const myHostel = await Hostel.findById(req.params.id);
+
+  if (title) myHostel.title = title;
+  if (description) myHostel.description = description;
+  if (category) myHostel.category = category;
+  if (HcontactNoP) myHostel.HcontactNoP = HcontactNoP;
+  if (HcontactNoW) myHostel.HcontactNoW = HcontactNoW;
+  if (completeAdress) myHostel.completeAddress = completeAdress;
+  if (streetNo) myHostel.streetNo = streetNo;
+  if (province) myHostel.province = province;
+  if (country) myHostel.country = country;
+
+  console.log(req.body)
+  // if(roomCharges){
+  //   const rooms = roomCharges.map(room => ({
+  //     roomType: room.roomType,
+  //     details: room.detail,
+  //     noOfBeds: parseInt(room.noOfBeds),
+  //     charges: parseFloat(room.charges)
+  //   }));
+  //   console.log(rooms)
+  //   myHostel.rooms = rooms;
+  // }
+
+  const updatedHostel = await myHostel.save()
+  res.json({
+    updatedHostel
+  })
+}
 
 // export { hostelbasicInfo, hostelTypeAndContact , hostelFacilitesAndRules, hostelRules, hostelImages, diplayAllHostels, displayHostelDetail, diplayMyHostel };
-export { registerHostel, registerHostelImages }
+export { registerHostel, registerHostelImages, diplayMyHostels, updateMyHostels, displayHostelDetail,diplayAllHostels, addHostelReviews }

@@ -51,16 +51,16 @@ const UpdateProfile = () => {
             <div className="updateProfileDiv">
                 <div className='avatar'>
                     <div style={{ position: "relative", display: "inline" }}>
-                        <Avatar alt="E" id="updateProfileIco" src={`${(userGot.userPic?.userImage) ? userGot.userPic.userImage?.path : "images/user-img.png"}`} />
+                        <Avatar alt="" id="updateProfileIco" src={`${(userGot.userPic) ? userGot.userPic : "images/user-img.png"}`} />
                         <div className='cameraIconDiv'>
                             <CameraAltIcon id="updateProfileCameraIco"/>
                         </div>
                     </div>
                     <div >
-                        <p className='userData userName'>{userGot.fName}&nbsp;{userGot.lName}</p>
-                        <p className='userData'> {userGot.email}</p>
-                        <p className='userData'> {dobFormatted}</p>
-                        <p className='userData'> {userGot?.city} - {userGot?.province}</p>
+                        <p className='userName'>{userGot.fName}&nbsp;{userGot.lName}</p>
+                        <p > {userGot.email}</p>
+                        <p > {dobFormatted}</p>
+                        <p > {userGot?.city} - {userGot?.province}</p>
                     </div>
                 </div>
 
@@ -148,7 +148,7 @@ const UpdateProfile = () => {
                             </LocalizationProvider>
                         </div>
                     </div>
-                    <div className='updateProfileBtnDiv'><button className='updateProfileBtn' type='submit'>{profileUpdating2 === "pending" ? "Updating ..." : "Update"}</button> </div>
+                    <div className='updateBtnDiv'><button className='updateBtn' type='submit'>{profileUpdating2 === "pending" ? "Updating ..." : "Update"}</button> </div>
                 </form>
             </div>
         </>

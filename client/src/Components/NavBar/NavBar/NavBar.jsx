@@ -7,12 +7,15 @@ import EmailRegister from "../../Auth/SignUp/EmailRegister";
 import Avatar from '@mui/material/Avatar';
 import "./NavBar.css";
 import {useDispatch, useSelector} from "react-redux";
-import { user, logoutUser, myProfile } from '../../../features/auth/userAuthSlice';
+import {user, logoutUser, myProfile, userPic} from '../../../features/auth/userAuthSlice';
 
 const NavBar = () => {
   const dispatch = useDispatch();
   const user2 = useSelector((state)=> user(state.user))
+  const userPic2 = useSelector((state)=> userPic(state.user))
 
+
+  
   const [openLogin, setOpen] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -49,7 +52,7 @@ const NavBar = () => {
                   sx={{ p: 0 }}
                 >
                   <MenuIcon id="navOptionsLines" />
-                  {(token) ? <Avatar alt="E" id="navAvatar" src={user2.userPic?.userImage?.path} /> : <AccountCircleIcon id="accountIcon" /> }
+                  {(token) ? <Avatar alt={user2.email} id="navAvatar" src={userPic2} /> : <AccountCircleIcon id="accountIcon" /> }
                 </IconButton>
               </Tooltip>
                   <Menu

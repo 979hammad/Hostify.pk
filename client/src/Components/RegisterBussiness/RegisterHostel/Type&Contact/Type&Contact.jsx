@@ -14,7 +14,7 @@ const TypeAndContact = ({name, handleNext}) => {
   }
 
   const handleHostelTypeSelection = (value) => {
-    setValue('category', {[value] : "true"});
+    setValue('category', value);
     clearErrors('category')
     // setCatValue(value)
   };

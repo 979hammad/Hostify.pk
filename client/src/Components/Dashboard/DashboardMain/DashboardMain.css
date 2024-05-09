@@ -9,7 +9,7 @@
 }
 
 .sideDash{
-    border-radius: 30px;
+    border-radius: 30px;  
     margin-left: 1%;
     padding: 0 20px;
     width: 17.5%;
@@ -48,9 +48,11 @@
     display: flex;
     padding: 7px 9px;
     border-radius: 20px;
-    margin: 12px 0;
+    margin-top: 5px;
     color: #1a1b1d;
+    position: relative;
     font-size: 14px;
+    z-index: 2;
 }
 
 .sideDashLinks:hover{
@@ -65,7 +67,45 @@
     color: white;
 }
 
-/* TopBar css  */
+.dashboardOptionsDiv{
+    background-color: rgb(10, 38, 80);
+    padding-top: 20px;
+    padding-bottom: 8px;
+    position: relative;
+    bottom: 15px;
+    height: fit-content;
+    border-radius: 0 0 20px 20px;
+    z-index: 1;
+}
+
+.dashboardOptions{
+    padding-left: 30px;
+    padding-bottom: 6px;
+    color: rgb(189, 189, 189);
+    font-size: 13px;
+    cursor: pointer;
+
+}
+
+.dashboardOptionsBold{
+    color: rgb(233, 233, 233);
+    letter-spacing: 1px;
+}
+
+.dashboardOptionsSidePadding{
+    padding-left: 43px;
+}
+
+.dashboardOptions:hover{
+    color: rgb(255, 255, 255);
+}
+
+.dashboardActive{
+    cursor: pointer;
+    color: white;
+}
+
+/* TopBar css */
 .topBarMain{
     display: flex;
     align-items: center;

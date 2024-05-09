@@ -9,7 +9,7 @@
 
 .swiper-button-prev, .swiper-button-next {
     position: absolute;
-    top: 160px !important;
+    top: 100px !important;
     /* #022230cd */
     background-color: white;
     padding: 2px;

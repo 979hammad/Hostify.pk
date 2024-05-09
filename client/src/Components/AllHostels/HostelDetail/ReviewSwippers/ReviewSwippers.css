@@ -1,0 +1,12 @@
+.reviewsDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#reviewAvatar{
+    margin-bottom: 2%;
+    height:60px;
+    width: 60px;
+}

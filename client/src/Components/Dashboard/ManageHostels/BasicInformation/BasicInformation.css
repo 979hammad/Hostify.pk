@@ -1,0 +1,38 @@
+@import "../../../../Constants/Colors.css";
+
+.basicInfoMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 30vw;
+}
+
+.basicInfoH {
+  color: var(--main-gray);
+  font-size: 2vw;
+  margin: 2vw 0 1vw 0;
+  position: relative;
+  left: 3.2vw;
+  padding-right: 13vw;
+}
+
+.info {
+  font-size: 1vw;
+}
+
+#infoIco {
+  font-size: 1.3vw;
+}
+
+#title,
+#description {
+  width: 35vw;
+  font-size: 1vw;
+}
+
+#hHelperText {
+  min-height: 20px;
+  color: rgb(204, 0, 0);
+}
+
+

@@ -1,0 +1,39 @@
+.hostelDetailImageMainDiv{
+    display: flex;
+    align-items: center;
+    margin-bottom: 2%;
+}
+
+.hostelDetailMainImg{
+    width: 575px;
+    height: 362px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.hostelDetailSideImages{
+    width: 265px;
+    height: 176px;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.hostelDetailSideImagesDiv{
+    display: grid;
+    grid-template-columns: 265px 265px;
+    column-gap: 10px;
+    row-gap: 10px;
+    border-radius: 0 20px 20px 0;
+}
+
+/* preview images  */
+#displayHostelDetailImage{
+    object-fit: contain
+}
+
+.previewImage{
+    width: 65.9vw;
+    height: 85vh;
+    object-fit: cover;
+}
+
