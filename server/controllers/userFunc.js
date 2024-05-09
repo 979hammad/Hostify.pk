@@ -13,8 +13,7 @@ const userSignUp = async (req, res) => {
   const { email, password, cPassword } = req.body
   if (
     !email ||
-    !password ||
-    !cPassword
+    !password 
   ) {
     throw new ExpressError(400, "Please Enter all required fields");
   } else {
@@ -22,7 +21,7 @@ const userSignUp = async (req, res) => {
     if (userFound) {
       throw new ExpressError(404, "Email already registered kindly login");
     }
-    if (password === cPassword) {
+    if (password) {
       const salt = await bcrypt.genSalt();
       data(salt)
       const hashedPassword = await bcrypt.hash(password, salt);
